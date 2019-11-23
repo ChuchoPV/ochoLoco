@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var PlayerSchema = new Schema({
-  id: { type: Number, required: true},
+  id: { type: String, required: true},
   cards: { type : Array , "default" : []}
 });
 
