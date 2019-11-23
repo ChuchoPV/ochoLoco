@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const controladorMarca = require("../controllers/controller");
+const controladorMarca = require("../controllers/controllerDB");
 
 router.post('/crearJuego/', controladorMarca.crearJuego);
 router.delete('/eliminarJuego/:id', controladorMarca.eliminarJuego);
