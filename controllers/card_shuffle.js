@@ -2,7 +2,7 @@ var cards_set = new Set(["PA", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "
 
 exports.obtener_carta_siguiente = function(player_cards, stack_cards){
     for(var i = 0; i < player_cards.length; i++){
-        var hand_cards = player_cards[i]["mano"];
+        var hand_cards = player_cards[i]["cards"];
         for(var j = 0; j < hand_cards.length; j++){
             cards_set.delete(hand_cards[j]);
         }
@@ -12,7 +12,9 @@ exports.obtener_carta_siguiente = function(player_cards, stack_cards){
     }
     var residual_cards = Array.from(cards_set);
     var number = Math.floor(Math.random() * (residual_cards.length - 0));
-    return residual_cards[number];
+    var residual = residual_cards[number];
+    cards_set.delete(residual);
+    return [residual, Array.from(cards_set)];
 };
 
 //obtener_carta_siguiente([{"mano": ["PA"]}, {"mano": ["TK"]}, {"mano": ["DJ"]}])
