@@ -41,3 +41,19 @@ exports.usarCarta = (game, player, card) => {
         GameController.actualizarJuego(game); // Debe enviar un body (URL)
     };
 };
+
+exports.cambioPalo = (game, player, palo) => {
+    let juego = GameController.consultarJuego(game);
+    let jugadores = juego.players;
+    let cardTopPalo = juego.top_card.charAt(0);
+    let cardTopNum = juego.top_card.substr(1);
+    for (var i = 0; i < jugadores.length; i++) {
+        // console.log(jugadores[i]);
+        if (jugadores[i] == player) {
+            if (palo == cardTopPalo || cardTopNum == 8) {
+                juego.palo = palo;
+            };
+        };
+        GameController.actualizarJuego(game); // Debe enviar un body (URL)
+    };
+};
