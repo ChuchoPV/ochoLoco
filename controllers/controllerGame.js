@@ -5,6 +5,7 @@ const GameController = require("./controllerGame");
 
 exports.comerCarta = (game, player) => {
     let juego = GameController.consultarJuego(game);
+    let id = juego.id;
     let jugadores = juego.players;
     let baraja = juego.deck_cards;
     for (var i = 0; i < jugadores.length; i++) {
@@ -14,12 +15,13 @@ exports.comerCarta = (game, player) => {
             jugadores[i].cards.push(cartaComida[0]);
             baraja = cartaComida[1];
         }
-        GameController.actualizarJuego(game); // Debe enviar un body (URL)
+        GameController.actualizarJuego(id, game); // Debe enviar un body (URL)
     };
 };
 
 exports.usarCarta = (game, player, card) => {
     let juego = GameController.consultarJuego(game);
+    let id = juego.id;
     let jugadores = juego.players;
     let cardPalo = card.charAt(0);
     let cardNum = card.substr(1);
@@ -38,12 +40,13 @@ exports.usarCarta = (game, player, card) => {
                 }
             }
         }
-        GameController.actualizarJuego(game); // Debe enviar un body (URL)
+        GameController.actualizarJuego(id, game); // Debe enviar un body (URL)
     };
 };
 
 exports.cambioPalo = (game, player, palo) => {
     let juego = GameController.consultarJuego(game);
+    let id = juego.id;
     let jugadores = juego.players;
     let cardTopPalo = juego.top_card.charAt(0);
     let cardTopNum = juego.top_card.substr(1);
@@ -54,6 +57,6 @@ exports.cambioPalo = (game, player, palo) => {
                 juego.palo = palo;
             };
         };
-        GameController.actualizarJuego(game); // Debe enviar un body (URL)
+        GameController.actualizarJuego(id, game); // Debe enviar un body (URL)
     };
 };

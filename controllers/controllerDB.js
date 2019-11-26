@@ -63,7 +63,7 @@ exports.agregarJugador = (req, res) => {
   });
 };
 
-exports.actualizarJuego = (req, res) => {
+exports.actualizarJuegoWeb = (req, res) => {
   // Se obtiene el id del juego del url para eliminarlo después.
   console.log(req.params.id);
   Game.updateOne(
@@ -73,6 +73,20 @@ exports.actualizarJuego = (req, res) => {
       (err, juego) => {
         if (err) throw err;
         res.send(juego);
+      }
+    );
+};
+
+exports.actualizarJuego = (game_id, game) => {
+  // Se obtiene el id del juego del url para eliminarlo después.
+  console.log(game_id);
+  Game.updateOne(
+      // Se obtiene el nombre de la marca del url para cambiar sus datos después.
+      { id: game_id },
+      { $set: game },
+      (err, juego) => {
+        if (err) throw err;
+        console.log("Juego Actualizado");
       }
     );
 };
