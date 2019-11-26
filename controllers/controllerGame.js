@@ -50,7 +50,7 @@ exports.cambioPalo = (game, player, palo) => {
     for (var i = 0; i < jugadores.length; i++) {
         // console.log(jugadores[i]);
         if (jugadores[i] == player) {
-            if (palo == cardTopPalo || cardTopNum == 8) {
+            if (palo == cardTopPalo && cardTopNum == 8) {
                 juego.palo = palo;
             };
         };
