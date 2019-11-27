@@ -3,15 +3,29 @@ const Player = require("../models/playerSchema");
 const GameController = require('./controllerGame');
 var crypto = require('crypto');
 var base64url = require('base64url');
+const Shuffle = require("./card_shuffle");
 
 function randomString() {
   return base64url(crypto.randomBytes(5));
 }
 
-const cards = ["PA", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "PJ", "PQ", "PK", "CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK", "DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK", "TA", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "TJ", "TQ", "TK"]
+function agregarCartasIniciales(cartas_disponibles){
+  var player_cards = [];
+  //console.log(cartas_disponibles);
+  for(var i = 1; i <= 5; i++){
+    var values = Shuffle.obtener_carta_siguiente([{cards: player_cards}], cartas_disponibles);
+    player_cards.push(values[0]);
+    cartas_disponibles = values[1];
+    //console.log(cartas_disponibles);
+  }
+  return [cartas_disponibles, player_cards];
+}
 
 exports.crearJuego = (req, res) => {
-  let topCard = cards[Math.floor((Math.random() * cards.length))];
+  var cards = ["PA", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "PJ", "PQ", "PK", "CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK", "DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK", "TA", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "TJ", "TQ", "TK"]
+  var value = Math.floor((Math.random() * cards.length));
+  var topCard = cards[value];
+  cards.splice(value, 1)
   // Creación de un documento de tipo Marca. La información se obtiene del JSON que manda el cliente.
   var game = new Game({
     id: randomString(),
@@ -52,19 +66,22 @@ exports.agregarJugador = (req, res, idJuego) => {
     //usar marca
     var juego = juego_list[0];
     var jugadores = juego["players"];
+    var cards = juego["deck_cards"];
+    var cartas = agregarCartasIniciales(cards);
     var nuevo = new Player({
       id: randomString(),
-      cards: []
+      cards: cartas[1]
     });
     jugadores.push(nuevo);
     juego["players"] = jugadores;
+    juego["deck_cards"] = cartas[0];
     var id = juego["id"];
     Game.updateOne(
       // Se obtiene el nombre de la marca del url para cambiar sus datos después.
       { id: id }, { $set: juego },
       (err, juegoN) => {
         if (err) throw err;
-        console.log(juego);
+        //console.log(juego);
       }
     );
   });
@@ -72,7 +89,7 @@ exports.agregarJugador = (req, res, idJuego) => {
 
 exports.actualizarJuegoWeb = (req, res) => {
   // Se obtiene el id del juego del url para eliminarlo después.
-  console.log(req.params.id);
+  //console.log(req.params.id);
   Game.updateOne(
     // Se obtiene el nombre de la marca del url para cambiar sus datos después.
     { id: req.params.id }, { $set: req.body },
@@ -85,21 +102,21 @@ exports.actualizarJuegoWeb = (req, res) => {
 
 exports.actualizarJuego = (game_id, game) => {
   // Se obtiene el id del juego del url para eliminarlo después.
-  console.log(game_id);
+  //console.log(game_id);
   Game.updateOne(
     // Se obtiene el nombre de la marca del url para cambiar sus datos después.
     { id: game_id }, { $set: game },
     (err, juego) => {
       if (err) throw err;
-      console.log("Juego Actualizado");
+      //console.log("Juego Actualizado");
     }
   );
 };
 
 exports.consultarJuego = (req, res) => {
   // Se realiza la ptición a la base de datos.
-  Game.find({ id: req.params.id }, (err, juego) => {
+  Game.find({ id: req.params.id }, (err, marca) => {
     if (err) throw err;
-    console.log(juego);
+    res.send(marca);
   });
 };

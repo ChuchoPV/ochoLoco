@@ -7,9 +7,6 @@ exports.obtener_carta_siguiente = function(player_cards, stack_cards){
             cards_set.delete(hand_cards[j]);
         }
     }
-    for(var i = 0; i < stack_cards.length; i++){
-        cards_set.delete(stack_cards[i]);
-    }
     var residual_cards = Array.from(cards_set);
     var number = Math.floor(Math.random() * (residual_cards.length - 0));
     var residual = residual_cards[number];
