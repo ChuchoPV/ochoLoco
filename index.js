@@ -15,6 +15,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, "Error en la conexión"))
 
 app.use(express.json());
+app.engine('html', require("ejs").renderFile);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/ochoLoco', menuPrincipal);
