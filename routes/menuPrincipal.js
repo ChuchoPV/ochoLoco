@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/nuevoJuego', controladorMenu.nuevoJuego);
-router.get('/unirseJuego', controladorMenu.unirseJuego);
+router.get('/unirseJuego/:id', controladorMenu.unirseJuego);
 router.get('/salir', controladorMenu.salir);
 
 module.exports = router;

@@ -1,3 +1,5 @@
+const controladorDB = require("./controllerDB");
+
 exports.prueba = (req, res) => {
     res.send('Esto es una prueba');
 }
@@ -7,11 +9,11 @@ exports.menuPrincipal = (req, res) => {
 }
 
 exports.nuevoJuego = (req, res) => {
-    res.send('Nuevo Juego');
+    controladorDB.crearJuego(req,res);
 }
 
 exports.unirseJuego = (req, res) => {
-    res.send('Unirse a un Juego');
+    controladorDB.agregarJugador(req, res, req.params.id)
 }
 
 exports.salir = (req, res) => {

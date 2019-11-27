@@ -17,7 +17,7 @@ db.on('error', console.error.bind(console, "Error en la conexión"))
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', menuPrincipal);
+app.use('/ochoLoco', menuPrincipal);
 
 app.listen(process.env.PORT, () => {
     console.log("Server running on port: 8080");
