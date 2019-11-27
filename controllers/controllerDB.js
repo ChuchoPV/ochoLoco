@@ -98,8 +98,8 @@ exports.actualizarJuego = (game_id, game) => {
 
 exports.consultarJuego = (req, res) => {
   // Se realiza la ptición a la base de datos.
-  Game.find({ id: req.params.id }, (err, marca) => {
+  Game.find({ id: req.params.id }, (err, juego) => {
     if (err) throw err;
-    res.send(marca);
+    console.log(juego);
   });
 };
