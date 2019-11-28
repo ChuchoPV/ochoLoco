@@ -32,7 +32,8 @@ exports.crearJuego = (req, res) => {
     players: [],
     deck_cards: cards,
     top_card: topCard,
-    palo: topCard.charAt(0)
+    palo: topCard.charAt(0),
+    turno: 0
   });
   // Guardar la información en la base de datos.
   game.save(err => {

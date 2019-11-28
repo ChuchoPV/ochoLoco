@@ -54,6 +54,10 @@ exports.usarCarta = (req, res, game, player, card) => {
                         }
                     }
                 }
+                juego.turno += 1;
+                if(juego.turno >= jugadores.length){
+                    juego.turno = 0;
+                }
             }
             juego.players = jugadores;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL

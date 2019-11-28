@@ -6,7 +6,8 @@ var GameSchema = new Schema({
   players: { type: Array, "default": [] },
   deck_cards: { type: Array, "default": [] },
   top_card: { type: String },
-  palo: { type: String }
+  palo: { type: String },
+  turno: { type: Number }
 });
 
 module.exports = mongoose.model("Game", GameSchema);
