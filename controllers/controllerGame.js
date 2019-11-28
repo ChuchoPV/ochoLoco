@@ -64,18 +64,21 @@ exports.usarCarta = (req, res, game, player, card) => {
 
 // 
 exports.cambioPalo = (game, player, palo) => {
-    let juego = GameController.consultarJuego(game);
-    let id = juego.id;
-    let jugadores = juego.players;
-    let cardTopPalo = juego.top_card.charAt(0);
-    let cardTopNum = juego.top_card.substr(1);
-    for (var i = 0; i < jugadores.length; i++) {
-        // console.log(jugadores[i]);
-        if (jugadores[i] == player) {
-            if (palo == cardTopPalo && cardTopNum == 8) {
-                juego.palo = palo;
+    Game.find({ id: game }, (err, juego_arr) => {
+        if (err) throw err;
+        let juego = juego_arr[0];
+        let id = juego.id;
+        let jugadores = juego.players;
+        let cardTopPalo = juego.top_card.charAt(0);
+        let cardTopNum = juego.top_card.substr(1);
+        for (var i = 0; i < jugadores.length; i++) {
+            // console.log(jugadores[i]);
+            if (jugadores[i] == player) {
+                if (palo == cardTopPalo && cardTopNum == 8) {
+                    juego.palo = palo;
+                };
             };
+            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
-        GameController.actualizarJuego(id, game); // Debe enviar un body (URL)
-    };
+    });
 };
