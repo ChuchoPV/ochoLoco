@@ -23,5 +23,8 @@ router.get('/salir', (req, res) => {
 router.post('/comerCarta/:game_id/:user_id', (req, res) => {
     controladorGame.comerCarta(req, res, req.params.game_id, req.params.user_id);
 });
+router.post('/usarCarta/:game_id/:user_id/:carta', (req, res) => {
+    controladorGame.usarCarta(req, res, req.params.game_id, req.params.user_id, req.params.carta);
+});
 
 module.exports = router;
