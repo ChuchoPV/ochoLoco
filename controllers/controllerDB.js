@@ -82,7 +82,7 @@ exports.agregarJugador = (req, res, idJuego) => {
       { id: id }, { $set: juego },
       (err, juegoN) => {
         if (err) throw err;
-        res.send(juego);
+        res.redirect('/juego/'+juego.id);
       }
     );
   });
@@ -114,11 +114,45 @@ exports.actualizarJuego = (game_id, game) => {
   );
 };
 
+function getPaloImage(palo){
+  var img = '';
+  switch (palo) {
+    case 'P':
+      img = 'picas.png';
+      break;
+    case 'T':
+      img = 'trebol.png';
+      break;
+    case 'C':
+      img = 'corazones.png';
+      break;
+    case 'D':
+      img = 'diamante.png';
+      break;
+    default:
+      break;
+  }
+  return img;
+}
+
 exports.consultarJuego = (req, res) => {
   // Se realiza la ptición a la base de datos.
-  Game.find({ id: req.params.id }, (err, marca) => {
+  Game.find({ id: req.params.id }, (err, juego) => {
     if (err) throw err;
-    res.send(marca);
+    var juegoNew = juego;
+
+    
+    for(var j = 0; j < juegoNew[0].players.length; j++){
+      for(var i = 0; i < juegoNew[0].players[j].cards.length; i++){
+        var palo = getPaloImage(juegoNew[0].players[0].cards[i].charAt(0));
+        var newCard = {
+          value : juegoNew[0].players[0].cards[i].charAt(1),
+          foto : palo
+        }
+        juegoNew[0].players[0].cards[i] = newCard;
+      }
+    }
+    res.render('juego.html', {game: juegoNew[0]});
   });
 };
 

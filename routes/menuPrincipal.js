@@ -11,7 +11,9 @@ router.get('/', (req, res) => {
 });
 
 //AGREGA UN NUEVO JUEGO CON UN JUGADOR
-router.post('/nuevoJuego', controladorDB.crearJuego);
+router.get('/nuevoJuego', controladorDB.crearJuego);
+
+router.get('/juego/:id', controladorDB.consultarJuego);
 
 //CONSULTA UN JUEGO BASADO EN EL ID DEL PARAMETRO
 router.get('/consultarJuego/:id', controladorDB.consultarJuego);
