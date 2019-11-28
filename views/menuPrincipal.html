@@ -1,39 +1,95 @@
-<html>
-<!--
- * Proyecto Final: Ocho Loco
- * Fecha: 19-Nov-2019
- * Autores:
- *           A01****** Servio Tulio
- *           A01378903 Jesús Perea
- *           A01****** Jorge Aharon López Aguilar
- *           A01379228 Adrián Méndez López
--->
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
-    <title>8 Loco</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <title>Ocho Loco</title>
+    <style>
+        .box {
+            color: black; 
+            transition: box-shadow .1s;
+            border-radius:10px;
+            height: 200px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box:hover {
+            box-shadow: 0 0 11px rgba(77, 42, 235, 0.2); 
+        }
+        @media only screen and (max-width: 600px){
+            .centros{
+                margin-top: -80px;
+            }
+            .creditos{
+                margin-top: 50px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Ocho Loco</h1>
+    <div class="container" style="text-align: center; margin-top:10px">
+        <div class="row align-items-start"  style="height: 33vh">
+            <div class="col">
+                <h1>Ocho Loco</h1>
+            </div>
+        </div>
+        <div class="row align-items-center centros"  style="height: 33vh">
+            <div class="col-sm box" style="margin-right: 10px;"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Unirse A Un Juego
+            </div>
+            <div class="col-sm box accordion" id="accordionExample">
+                Crear Nuevo Juego
+            </div>
+        </div>
+        <div class="row">
+            <div class="collapse col" id="collapseExample">
+                <div class="card card-body">
+                <form action='unirseJuego' method='POST'>
+                    <div class="form-group row">
+                        <label for="idJuego" class="col-sm-2 col-form-label">ID Juego</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="id" class="form-control" id="idJuego">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Unirse</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
 
-    <ul>
-        <li>
-            <a href="/nuevoJuego">Crear un nuevo juego</a>
-        </li>
-        <li>
-            <a href="/unirseJuego">Unirse a un juego existente</a>
-        </li>
-        <li>
-            <a href="/salir">Salir</a>
-        </li>
-    </ul>
 
-    <p>2019 por Servio, Jesús, Jorge y Adrián</p>
+        <div class="row align-items-end creditos"  style="height: 33vh">
+            <div class="col">
+                <p style="font-size: 10px; color: grey">Juego Creado por Jesús Perea Villegas, Jorge Aharon López Aguilar,
+                Adrián Méndez López, Servio Tulio Reyes Castillo</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
 </body>
-
 </html>

@@ -23,6 +23,10 @@ router.get('/unirseJuego/:id', (req, res) => {
     controladorDB.agregarJugador(req, res, req.params.id);
 });
 
+router.post('/unirseJuego', (req, res) =>{
+   res.redirect('/unirseJuego/'+req.body.id)
+});
+
 //ELIMINA UN JUEGO CON EL ID DEL PARAMETRO
 router.delete('/eliminarJuego/:id', controladorDB.eliminarJuego);
 
