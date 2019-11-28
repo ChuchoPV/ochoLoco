@@ -81,7 +81,7 @@ exports.agregarJugador = (req, res, idJuego) => {
       { id: id }, { $set: juego },
       (err, juegoN) => {
         if (err) throw err;
-        //console.log(juego);
+        res.send(juego);
       }
     );
   });
@@ -120,3 +120,4 @@ exports.consultarJuego = (req, res) => {
     res.send(marca);
   });
 };
+

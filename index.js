@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const router = require("./routes/rutas");
 const menuPrincipal = require('./routes/menuPrincipal');
 const bodyParser = require("body-parser");
 
