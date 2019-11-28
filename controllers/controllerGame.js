@@ -56,7 +56,7 @@ exports.usarCarta = (req, res, game, player, card) => {
                 }
             }
             juego.players = jugadores;
-            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL
         }
         res.send(juego);
     });
@@ -68,17 +68,7 @@ exports.cambioPalo = (game, player, palo) => {
         if (err) throw err;
         let juego = juego_arr[0];
         let id = juego.id;
-        let jugadores = juego.players;
-        let cardTopPalo = juego.top_card.charAt(0);
-        let cardTopNum = juego.top_card.substr(1);
-        for (var i = 0; i < jugadores.length; i++) {
-            // console.log(jugadores[i]);
-            if (jugadores[i] == player) {
-                if (palo == cardTopPalo && cardTopNum == 8) {
-                    juego.palo = palo;
-                };
-            };
-            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
-        };
+        juego.palo = palo;
+        GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
     });
 };
