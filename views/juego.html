@@ -10,6 +10,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>OchoLoco</title>
     <style type="text/css">
+        .box {
+          color: black;
+          transition: box-shadow .1s;
+          border-radius:10px;
+          border: 1px solid #ccc;
+        }
+        
+        .box:hover {
+          box-shadow: 0 0 11px rgba(33,33,33,.2); 
+        }
         ul{
             list-style: none;
         }
@@ -24,7 +34,20 @@
 <body style="text-align:center;">
         
     <div class="container">
-        <div class="row align-items-end" style="height:100vh">
+        <div class="row align-items-center" style="height:33vh;">
+            
+        </div>  
+        <div class="row align-items-center" style="height:33vh;">
+             <div class="col">
+                 <img src="/img/back_card.jpg" style="width:100px;">
+             </div>       
+             <div class="col">
+                <div class="box" style="width:100px;">
+                    <%= game.top_card %>
+                </div>
+             </div>
+        </div>
+        <div class="row align-items-end" style="height:34vh;">
             <% game.players[0].cards.forEach( (card) => { %>
                 <div class="card col" id="carta">
                   <div class="card-body container">
