@@ -67,7 +67,7 @@ exports.usarCarta = (req, res, game, player, card) => {
 }
 
 // 
-exports.cambioPalo = (game, player, palo) => {
+exports.cambioPalo = (req, res, game, player, palo) => {
     Game.find({ id: game }, (err, juego_arr) => {
         if (err) throw err;
         let juego = juego_arr[0];

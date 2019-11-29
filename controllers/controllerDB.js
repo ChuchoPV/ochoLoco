@@ -145,8 +145,10 @@ exports.consultarJuego = (req, res) => {
       
       if(juegoNew[0].players.length > 1){
         if(req.params.user == juegoNew[0].players[juegoNew[0].turno].id){
+          juegoNew[0].comer_link = "/comerCarta/"+juegoNew[0].id  +"/"+ juegoNew[0].players[juegoNew[0].turno].id
           juegoNew[0].comer = "back_card"
         }else{
+          juegoNew[0].comer_link = '#'
           juegoNew[0].comer = "none"
         }
       }
