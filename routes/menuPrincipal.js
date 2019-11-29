@@ -36,18 +36,22 @@ router.get('/salir', (req, res) => {
 });
 
 //EL JUGADOR DADO EL PARAMETRO user_id EN EL JUEGO game_id TOMA UNA CARTA DEL MONTÓN
-router.post('/comerCarta/:game_id/:user_id', (req, res) => {
+router.get('/comerCarta/:game_id/:user_id', (req, res) => {
     controladorGame.comerCarta(req, res, req.params.game_id, req.params.user_id);
 });
 
 //EL JUGADOR PONE UNA CARTA DE SU BARAJA DADO POR EL PARAMETRO carta
-router.post('/usarCarta/:game_id/:user_id/:carta', (req, res) => {
+router.get('/usarCarta/:game_id/:user_id/:carta', (req, res) => {
     controladorGame.usarCarta(req, res, req.params.game_id, req.params.user_id, req.params.carta);
 });
 
 //EL JUGADOR CAMBIA DE PALO LA BARAJA DADO POR EL PARAMETRO palo
 router.post('/usarCarta/:game_id/:user_id/:palo', (req, res) => {
     controladorGame.cambioPalo(req, res, req.params.game_id, req.params.user_id, req.params.palo);
+});
+
+router.get('/info', (req, res)=>{
+   res.render("../views/info.html") 
 });
 
 module.exports = router;

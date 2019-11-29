@@ -8,12 +8,9 @@ exports.comerCarta = (req, res, game, player) => {
     Game.find({ id: game }, (err, juego_arr) => {
         if (err) throw err;
         let juego = juego_arr[0];
-        //console.log(juego);
         let id = juego.id;
         let jugadores = juego.players;
         let baraja = juego.deck_cards;
-        console.log(jugadores);
-        console.log(baraja);
         for (var i = 0; i < jugadores.length; i++) {
             // console.log(jugadores[i]);
             if (jugadores[i].id == player) {
@@ -24,7 +21,7 @@ exports.comerCarta = (req, res, game, player) => {
             juego.players = jugadores;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
-        //res.redirect('/consultarJuego/'+game+'/'+player);
+        res.redirect('/consultarJuego/'+game+'/'+player);
     });
 };
 
@@ -39,10 +36,6 @@ exports.usarCarta = (req, res, game, player, card) => {
         let cardNum = card.substr(1);
         let cardTopPalo = juego.top_card.charAt(0);
         let cardTopNum = juego.top_card.substr(1);
-        console.log(cardPalo);
-        console.log(cardNum);
-        console.log(cardTopPalo);
-        console.log(cardTopNum);
         for (var i = 0; i < jugadores.length; i++) {
             // console.log(jugadores[i]);
             if (jugadores[i].id == player) {
@@ -62,12 +55,12 @@ exports.usarCarta = (req, res, game, player, card) => {
             juego.players = jugadores;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL
         }
-        res.send(juego);
+        res.redirect('/consultarJuego/'+ game +'/'+player);
     });
 }
 
 // 
-exports.cambioPalo = (game, player, palo) => {
+exports.cambioPalo = (req, res, game, player, palo) => {
     Game.find({ id: game }, (err, juego_arr) => {
         if (err) throw err;
         let juego = juego_arr[0];
