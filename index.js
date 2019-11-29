@@ -18,6 +18,8 @@ app.use(express.json());
 app.engine('html', require("ejs").renderFile);
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static('views'));
+
 app.use('/', menuPrincipal);
 
 app.listen(process.env.PORT, () => {

@@ -50,4 +50,8 @@ router.post('/usarCarta/:game_id/:user_id/:palo', (req, res) => {
     controladorGame.cambioPalo(req, res, req.params.game_id, req.params.user_id, req.params.palo);
 });
 
+router.get('/info', (req, res)=>{
+   res.render("../views/info.html") 
+});
+
 module.exports = router;
