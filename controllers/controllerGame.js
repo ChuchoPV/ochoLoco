@@ -67,6 +67,7 @@ exports.cambioPalo = (req, res, game, player, palo) => {
         let id = juego.id;
         juego.palo = palo;
         GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+        res.redirect('/consultarJuego/'+ game +'/'+player);
     });
 };
 

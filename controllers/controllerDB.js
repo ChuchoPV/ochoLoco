@@ -162,7 +162,6 @@ exports.consultarJuego = (req, res) => {
         var playable = 'carta';
         var link;
         if ( (cardPalo == cardTopPalo || cardNum == '8' || cardNum == cardTopNum) && req.params.user == juegoNew[0].players[juegoNew[0].turno].id) {
-          playable = 'carta';
           if(juegoNew[0].players[j].cards[i].original == undefined){
             link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i];
           }else{

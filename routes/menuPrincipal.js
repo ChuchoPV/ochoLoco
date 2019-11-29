@@ -46,8 +46,8 @@ router.get('/usarCarta/:game_id/:user_id/:carta', (req, res) => {
 });
 
 //EL JUGADOR CAMBIA DE PALO LA BARAJA DADO POR EL PARAMETRO palo
-router.post('/usarCarta/:game_id/:user_id/:palo', (req, res) => {
-    controladorGame.cambioPalo(req, res, req.params.game_id, req.params.user_id, req.params.palo);
+router.post('/usarCarta', (req, res) => {  ///usarCarta/:game_id/:user_id/:palo
+    controladorGame.cambioPalo(req, res, req.body.game, req.body.player, req.body.palo);
 });
 
 router.get('/info', (req, res)=>{
