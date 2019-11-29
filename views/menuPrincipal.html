@@ -17,6 +17,9 @@
             crossorigin="anonymous"></script>
     <title>Ocho Loco</title>
     <style>
+        a{
+            text-decoration:none;
+        }
         .box {
             color: black; 
             transition: box-shadow .1s;
@@ -52,9 +55,11 @@
             <div class="col-sm box" style="margin-right: 10px;"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Unirse A Un Juego
             </div>
-            <div class="col-sm box accordion" id="accordionExample">
-                Crear Nuevo Juego
-            </div>
+            <a href="/nuevoJuego" class="col-sm">
+                <div class="box accordion" id="accordionExample">
+                    Crear Nuevo Juego
+                </div>
+            </a>
         </div>
         <div class="row">
             <div class="collapse col" id="collapseExample">

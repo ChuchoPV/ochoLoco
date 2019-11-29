@@ -24,7 +24,7 @@ exports.comerCarta = (req, res, game, player) => {
             juego.players = jugadores;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
-        res.send(game);
+        //res.redirect('/consultarJuego/'+game+'/'+player);
     });
 };
 

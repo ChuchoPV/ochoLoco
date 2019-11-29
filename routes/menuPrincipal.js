@@ -13,10 +13,10 @@ router.get('/', (req, res) => {
 //AGREGA UN NUEVO JUEGO CON UN JUGADOR
 router.get('/nuevoJuego', controladorDB.crearJuego);
 
-router.get('/juego/:id', controladorDB.consultarJuego);
+router.get('/juego/:id/:user', controladorDB.consultarJuego);
 
 //CONSULTA UN JUEGO BASADO EN EL ID DEL PARAMETRO
-router.get('/consultarJuego/:id', controladorDB.consultarJuego);
+router.get('/consultarJuego/:id/:user', controladorDB.consultarJuego);
 
 //AGREGA UN JUGADOR AL JUEGO CON EL ID DEL PARAMETRO
 router.get('/unirseJuego/:id', (req, res) => {

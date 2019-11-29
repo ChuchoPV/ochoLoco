@@ -82,7 +82,7 @@ exports.agregarJugador = (req, res, idJuego) => {
       { id: id }, { $set: juego },
       (err, juegoN) => {
         if (err) throw err;
-        res.redirect('/juego/'+juego.id);
+        res.redirect('/juego/'+juego.id+'/'+nuevo.id);
       }
     );
   });
@@ -109,7 +109,7 @@ exports.actualizarJuego = (game_id, game) => {
     { id: game_id }, { $set: game },
     (err, juego) => {
       if (err) throw err;
-      //console.log("Juego Actualizado");
+      console.log("Juego Actualizado");
     }
   );
 };
@@ -140,18 +140,28 @@ exports.consultarJuego = (req, res) => {
   Game.find({ id: req.params.id }, (err, juego) => {
     if (err) throw err;
     var juegoNew = juego;
-
     
     for(var j = 0; j < juegoNew[0].players.length; j++){
       for(var i = 0; i < juegoNew[0].players[j].cards.length; i++){
-        var palo = getPaloImage(juegoNew[0].players[0].cards[i].charAt(0));
+        var palo = getPaloImage(juegoNew[0].players[j].cards[i].charAt(0));
         var newCard = {
-          value : juegoNew[0].players[0].cards[i].charAt(1),
+          value : juegoNew[0].players[j].cards[i].charAt(1),
           foto : palo
         }
-        juegoNew[0].players[0].cards[i] = newCard;
+        juegoNew[0].players[j].cards[i] = newCard;
       }
     }
+
+    juegoNew[0].top_card = getPaloImage(juegoNew[0].top_card.charAt(0)) + " " +juegoNew[0].top_card.charAt(1)
+    
+    var playerNew;
+    juegoNew[0].players.forEach((player) => {
+      if(player.id == req.params.user){
+        playerNew = player;
+      }
+    });
+    juegoNew[0].players.splice( juegoNew[0].players.indexOf(playerNew), 1);
+    juegoNew[0].players.unshift( playerNew );
     res.render('juego.html', {game: juegoNew[0]});
   });
 };
