@@ -36,7 +36,7 @@ router.get('/salir', (req, res) => {
 });
 
 //EL JUGADOR DADO EL PARAMETRO user_id EN EL JUEGO game_id TOMA UNA CARTA DEL MONTÓN
-router.post('/comerCarta/:game_id/:user_id', (req, res) => {
+router.get('/comerCarta/:game_id/:user_id', (req, res) => {
     controladorGame.comerCarta(req, res, req.params.game_id, req.params.user_id);
 });
 
