@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,36 @@
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script src="js/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+
     <title>Ocho Loco</title>
+
+
     <style>
-        a{
-            text-decoration:none;
+        a {
+            text-decoration: none;
         }
+
+
         .box {
-            color: black; 
+            color: black;
             transition: box-shadow .1s;
-            border-radius:10px;
+            border-radius: 10px;
             height: 200px;
             border: 1px solid #ccc;
             display: flex;
@@ -33,31 +46,77 @@
         }
 
         .box:hover {
-            box-shadow: 0 0 11px rgba(77, 42, 235, 0.2); 
+            box-shadow: 0 0 11px rgba(77, 42, 235, 0.2);
         }
-        @media only screen and (max-width: 600px){
-            .centros{
+
+        @media only screen and (max-width: 600px) {
+            .centros {
                 margin-top: -80px;
             }
-            .creditos{
+
+            .creditos {
                 margin-top: 50px;
             }
         }
+
+        .site__header {
+            animation: fadeInUp 1s;
+        }
+
+        .site__title {
+            color: #f35626;
+            background-image: linear-gradient(92deg, #f35626 0%, #feab3a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: hue 60s infinite linear;
+        }
+
+
+        @keyframes hue {
+            from {
+                filter: hue-rotate(0deg);
+            }
+
+            to {
+                filter: hue-rotate(-360deg);
+            }
+        }
+
+        .info {
+            width: 100%;
+            height: 15vh;
+            margin-bottom: -60px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container" style="text-align: center; margin-top:10px">
-        <div class="row align-items-start"  style="height: 33vh">
-            <div class="col">
-                <h1>Ocho Loco</h1>
-            </div>
+
+        <header class="site__header island">
+            <div class="wrap">
+                <span id="animationSandbox" style="display: block;">
+                    <h1 class="site__title mega">Ocho Loco</h1>
+                </span>
+                
+        </header><!-- /.site__header -->
+
+        <div style="margin-bottom: 50px;">
+            <a href="info.html" class="col-sm">
+                <div class="wow slideInDown box accordion info" id="accordionExample">
+                    Reglas
+                </div>
+            </a>
         </div>
-        <div class="row align-items-center centros"  style="height: 33vh">
-            <div class="col-sm box" style="margin-right: 10px;"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+        <div class="row align-items-center centros" style="height: 33vh">
+            <div class="wow slideInLeft col-sm box" style="margin-right: 10px;" data-toggle="collapse"
+                href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Unirse A Un Juego
             </div>
             <a href="/nuevoJuego" class="col-sm">
-                <div class="box accordion" id="accordionExample">
+                <div class="wow slideInRight box accordion" id="accordionExample">
                     Crear Nuevo Juego
                 </div>
             </a>
@@ -65,37 +124,35 @@
         <div class="row">
             <div class="collapse col" id="collapseExample">
                 <div class="card card-body">
-                <form action='unirseJuego' method='POST'>
-                    <div class="form-group row">
-                        <label for="idJuego" class="col-sm-2 col-form-label">ID Juego</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="id" class="form-control" id="idJuego">
+                    <form action='unirseJuego' method='POST'>
+                        <div class="form-group row">
+                            <label for="idJuego" class="col-sm-2 col-form-label">ID Juego</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="id" class="form-control" id="idJuego">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Unirse</button>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Unirse</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
 
 
-        <div class="row align-items-end creditos"  style="height: 33vh">
+
+
+
+        <div class="row align-items-end creditos" style="height: 33vh">
             <div class="col">
-                <p style="font-size: 10px; color: grey">Juego Creado por Jesús Perea Villegas, Jorge Aharon López Aguilar,
-                Adrián Méndez López, Servio Tulio Reyes Castillo</p>
+                <p class="wow slideInUp" style="font-size: 10px; color: grey">Juego Creado por Jesús Perea Villegas, Jorge Aharon López
+                    Aguilar,
+                    Adrián Méndez López, Servio Tulio Reyes Castillo</p>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
 </body>
+
 </html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+
+
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script src="js/wow.min.js"></script>
+
+
+    <title>Ocho Loco</title>
+
+    <script>
+        new WOW().init();
+    </script>
+
+    <style>
+        p {
+            text-align: justify;
+        }
+
+        p.footer {
+            text-align: center;
+        }
+
+        .site__header {
+            animation: fadeInUp 1s;
+        }
+
+        .site__title {
+            color: #f35626;
+            background-image: linear-gradient(92deg, #f35626 0%, #feab3a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: hue 60s infinite linear;
+        }
+
+        @keyframes hue {
+            from {
+                filter: hue-rotate(0deg);
+            }
+
+            to {
+                filter: hue-rotate(-360deg);
+            }
+        }
+
+        img {
+            width: 30%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            img {
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+
+<body style="text-align: center;">
+    <header class="site__header island">
+        <div class="wrap">
+            <span id="animationSandbox" style="display: block;">
+                <h1 class="site__title mega">Reglas Del Juego</h1>
+            </span>
+    </header><!-- /.site__header -->
+
+
+    <div style="margin: 50px 30% 30px 30%;">
+        <img src="baraja.png" alt="Playing cards">
+        <p class="wow slideInRight">
+            Inicialmente las cartas se deben barajear. Posteriormente cada jugador recibe cinco cartas. Las cartas que
+            no
+            fueron
+            repartidas permanecen en la baraja boca abajo. Se toma la primera carta de la baraja que no sea un ocho y se
+            coloca boca
+            arriba para iniciar lo que será llamado la pila de descarte.
+        </p>
+        <br>
+        <p class="wow slideInRight">
+            El orden de los turnos de los jugadores corresponde al orden en que se conectaron al juego. Cada
+            participante durante su
+            turno debe tomar una de las cartas de su mano y colocarla boca arriba sobre la pila de descarte. Si no
+            cuenta con una
+            carta para tirar, el participante debe ir tomando una carta de la baraja hasta que por fin pueda tirar o
+            hasta que se
+            agote la baraja. Si un jugador no puede tirar y la baraja está agotada, entonces tendrá que pasar. Durante
+            su turno, un
+            jugador puede tomar cartas de la baraja si así lo desea, aún si posee una carta en su mano que bien pudiera
+            tirar.
+        </p>
+        <br>
+        <p class="wow slideInRight">
+            Cada carta que se tire (a excepción de un ocho) debe corresponder a la carta en el tope de la pila de
+            descarte, ya sea
+            por tener el mismo palo o la misma denominación. Por ejemplo, si la carta en el tope de la pila es el rey de
+            tréboles
+            (♣K) entonces el jugador en turno puede tirar cualquier carta con tréboles (♣) o un rey (K). El ocho se
+            considera
+            “loco”. Esto quiere decir que un jugador puede tirar durante su turno un ocho sin importar qué carta esté en
+            el tope de
+            la pila. Cuando esto ocurra, dicho jugador debe indicar el palo (pero nunca la denominación) con el que
+            desea que se
+            continúe el juego. El siguiente jugador en turno debe tirar una carta con el palo especificado o con otro
+            ocho.
+        </p>
+        <br>
+        <p class="wow slideInRight">
+            El primer jugador que se quede sin cartas gana el juego.
+        </p>
+    </div>
+    <p class="wow slideInRight footer" style="font-size: 10px; color: grey">Juego Creado por Jorge Aharon López Aguilar,
+        Jesús Perea Villegas, Adrián Méndez López, Servio Tulio Reyes Castillo</p>
+</body>
+
+</html>
