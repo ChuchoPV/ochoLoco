@@ -55,7 +55,7 @@ exports.usarCarta = (req, res, game, player, card) => {
                     }
                 }
                 juego.turno += 1;
-                if(juego.turno >= jugadores.length){
+                if (juego.turno >= jugadores.length) {
                     juego.turno = 0;
                 }
             }
@@ -74,5 +74,25 @@ exports.cambioPalo = (req, res, game, player, palo) => {
         let id = juego.id;
         juego.palo = palo;
         GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+    });
+};
+
+
+exports.contarPuntos = (game, player) => {
+    Game.find({ id: game }, (err, juego_arr) => {
+        if (err) throw err;
+        let juego = juego_arr[0];
+        let id = juego.id;
+        let jugadores = juego.players;
+        let puntos = 0;
+        for (var i = 0; i < jugadores.length; i++) {
+            if (jugadores[i].id == player) {
+                for (var j = 0; j < jugadores[i].cards.length; j++) {
+                    puntos += parseInt(jugadores[i].cards[j].substr(1));
+                }
+            }
+            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+        };
+        //res.redirect('/consultarJuego/'+game+'/'+player);
     });
 };
