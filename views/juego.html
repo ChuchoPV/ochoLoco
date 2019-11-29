@@ -8,9 +8,18 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <title>OchoLoco</title>
     <style type="text/css">
         .box {
+          color: black;
+          transition: box-shadow .1s;
+          border-radius:10px;
+          border: 1px solid #ccc;
+          justify-content: center;
+          display:flex;
+        }
+        .onlyBox {
           color: black;
           transition: box-shadow .1s;
           border-radius:10px;
@@ -37,6 +46,14 @@
         #carta:hover{
             height: 100px;
         }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        a:hover{
+            text-decoration: none;
+            color: black;
+        }
     </style>
 </head>
 <body style="text-align:center;">
@@ -53,10 +70,10 @@
         </div>  
         <div class="row align-items-center" style="height:33vh;">
              <div class="col align-self-center">
-                 <img class="back_card" src="/img/back_card.jpg" style="width:100px;">
+                 <img class=<%= game.comer %> src="/img/back_card.jpg" style="width:100px;">
              </div>       
              <div class="col align-self-center">
-                <div class="box container" style="width:100px; height: 138.27px">
+                <div class="onlyBox container" style="width:100px; height: 138.27px">
                     <div class="row" style="margin: 0px 10px 0px 5px;">
                         <div class="col align-self-start">
                              <img width="15px;" src= <%= "/img/"+ game.top_card.split(' ')[0]%>>
@@ -77,20 +94,22 @@
         </div>
         <div class="row align-items-end" style="height:34vh;">
             <% game.players[0].cards.forEach( (card) => { %>
-                <div class="card col" id="carta">
-                  <div class="card-body container">
-                    <div class="row">
-                        <div class="col align-self-start">
-                          <img width="20px;" src=<%="/img/"+card.foto %>>
-                        </div>
-                        <div class="col align-self-center">
-                          <%= card.value %>
-                        </div>
-                        <div class="col align-self-end">
-                          <img width="20px;" src=<%="/img/"+card.foto %>>
-                        </div>
+                <div class="card col" id=<%= card.jugable %>>
+                    <a href=<%= card.url%>>
+                      <div class="card-body container">
+                        <div class="row">
+                            <div class="col align-self-start">
+                              <img width="20px;" src=<%="/img/"+card.foto %>>
+                            </div>
+                            <div class="col align-self-center">
+                              <%= card.value %>
+                            </div>
+                            <div class="col align-self-end">
+                              <img width="20px;" src=<%="/img/"+card.foto %>>
+                            </div>
+                          </div>
                       </div>
-                  </div>
+                  </a>
                 </div>
             <% }); %>
         </div>
