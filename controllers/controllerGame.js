@@ -21,7 +21,7 @@ exports.comerCarta = (req, res, game, player) => {
             juego.players = jugadores;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
-        res.redirect('/consultarJuego/'+game+'/'+player);
+        res.redirect('/consultarJuego/' + game + '/' + player);
     });
 };
 
@@ -55,7 +55,7 @@ exports.usarCarta = (req, res, game, player, card) => {
             juego.players = jugadores;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL
         }
-        res.redirect('/consultarJuego/'+ game +'/'+player);
+        res.redirect('/consultarJuego/' + game + '/' + player);
     });
 }
 
@@ -82,11 +82,31 @@ exports.contarPuntos = (game, player) => {
         for (var i = 0; i < jugadores.length; i++) {
             if (jugadores[i].id == player) {
                 for (var j = 0; j < jugadores[i].cards.length; j++) {
-                    puntos += parseInt(jugadores[i].cards[j].substr(1));
-                }
-            }
+                    if (jugadores[i].cards[j].substr(1) == "J" || jugadores[i].cards[j].substr(1) == "Q" || jugadores[i].cards[j].substr(1) == "K") {
+                        puntos += 10;
+                    }
+                    else {
+                        puntos += parseInt(jugadores[i].cards[j].substr(1));
+                    }
+                };
+                GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+            };
+        };
+    });
+};
+
+exports.hayGanador = (game) => {
+    Game.find({ id: game }, (err, juego_arr) => {
+        if (err) throw err;
+        let juego = juego_arr[0];
+        let id = juego.id;
+        let jugadores = juego.players;
+        let ganador = null;
+        for (var i = 0; i < jugadores.length; i++) {
+            if (jugadores[i].cards.length == 0) {
+                ganador = jugadores[i].id;
+            };
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
-        //res.redirect('/consultarJuego/'+game+'/'+player);
     });
 };
