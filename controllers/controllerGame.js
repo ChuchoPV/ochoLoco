@@ -93,3 +93,19 @@ exports.contarPuntos = (game, player) => {
         };
     });
 };
+
+exports.hayGanador = (game) => {
+    Game.find({ id: game }, (err, juego_arr) => {
+        if (err) throw err;
+        let juego = juego_arr[0];
+        let id = juego.id;
+        let jugadores = juego.players;
+        let ganador = null;
+        for (var i = 0; i < jugadores.length; i++) {
+            if (jugadores[i].cards.length == 0) {
+                ganador = jugadores[i].id;
+            };
+            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+        };
+    });
+};
