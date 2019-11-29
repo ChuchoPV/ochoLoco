@@ -62,7 +62,7 @@ exports.usarCarta = (req, res, game, player, card) => {
             juego.players = jugadores;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL
         }
-        res.send(juego);
+        res.redirect('/consultarJuego/'+ game +'/'+player);
     });
 }
 

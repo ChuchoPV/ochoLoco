@@ -41,7 +41,7 @@ router.post('/comerCarta/:game_id/:user_id', (req, res) => {
 });
 
 //EL JUGADOR PONE UNA CARTA DE SU BARAJA DADO POR EL PARAMETRO carta
-router.post('/usarCarta/:game_id/:user_id/:carta', (req, res) => {
+router.get('/usarCarta/:game_id/:user_id/:carta', (req, res) => {
     controladorGame.usarCarta(req, res, req.params.game_id, req.params.user_id, req.params.carta);
 });
 
