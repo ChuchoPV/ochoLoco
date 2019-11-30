@@ -68,7 +68,7 @@ exports.cambioPalo = (req, res, game, player, palo) => {
         let id = juego.id;
         juego.palo = palo;
         GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
-        res.redirect('/consultarJuego/'+ game +'/'+player);
+        res.redirect('/consultarJuego/' + game + '/' + player);
     });
 };
 
@@ -91,17 +91,31 @@ exports.contarPuntos = (game, player) => {
             };
             juego.players[i].puntos = puntos;
         };
-        var ganador;
-        if(juego.players[0].puntos > juego.players[1].puntos){
-            ganador = '0';
-            juego.ganador = '0'
-        }else{
-            ganador = '1';
-            juego.ganador = '1'
-        }
+        GameController.actualizarJuego(id, juego);
+    });
+    Game.find({ id: game }, (err, juego_arr) => {
+        if (err) throw err;
+        let juego = juego_arr[0];
+        let id = juego.id;
+        let jugadores = juego.players;
+        let puntos = 0;
+        for (var i = 0; i < jugadores.length; i++) {
+            let ganador = null;
+            if (juego.players[0].puntos > juego.players[1].puntos) {
+                ganador = '0';
+                juego.ganador = '0'
+            }
+            else {
+                ganador = '1';
+                juego.ganador = '1'
+            }
+        };
         GameController.actualizarJuego(id, juego);
     });
 };
+
+
+
 
 exports.hayGanador = (game) => {
     Game.find({ id: game }, (err, juego_arr) => {
