@@ -109,7 +109,7 @@ exports.actualizarJuego = (game_id, game) => {
     { id: game_id }, { $set: game },
     (err, juego) => {
       if (err) throw err;
-      console.log("Juego Actualizado");
+      //console.log(juego);
     }
   );
 };
@@ -141,12 +141,39 @@ exports.consultarJuego = (req, res) => {
     if (err) throw err;
     var juegoNew = juego;
     
-    console.log(juego)
+    juegoNew[0].players.forEach( (player) => {
+      if(player.cards.length == 0){
+        if(player.id == req.params.user){
+          res.send("Ganaaste");
+        }else{
+          res.send("Perdiste");
+        }
+      }
+    }); 
+    
     if(juegoNew[0].ganador != undefined){
-      console.log(juego.ganador);
+      console.log(juegoNew[0].ganador)
     }
     else if(juegoNew[0].deck_cards.length == 0){
       GameController.contarPuntos(req.params.id, req.params.user)
+      Game.find({id : req.params.id}, (err, juego) => {
+        if(err) throw err;
+        if(juego[0].players[0].puntos > juego[0].players[1].puntos){
+          if(juego[0].players[0].id == req.params.user){
+            console.log("Ganaste")
+            res.send("Ganaste");
+          }else{
+            console.log("Perdiste")
+            res.send("Perdiste");
+          }
+        }else{
+          if(juego[0].players[0].id == req.params.user){
+            res.send("Perdiste");
+          }else{
+            res.send("Ganaste");
+          }
+        }
+      })
     }else{
     
       for(var j = 0; j < juegoNew[0].players.length; j++){

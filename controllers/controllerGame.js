@@ -76,20 +76,25 @@ exports.cambioPalo = (req, res, game, player, palo) => {
 exports.contarPuntos = (game, player) => {
     Game.find({ id: game }, (err, juego_arr) => {
         if (err) throw err;
-        let juego = juego_arr[0];
-        let id = juego.id;
-        let jugadores = juego.players;
-        let puntos = 0;
+        var juego = juego_arr[0];
+        var id = juego.id;
+        var jugadores = juego.players;
+        var puntoS = 0;
         for (var i = 0; i < jugadores.length; i++) {
             for (var j = 0; j < jugadores[i].cards.length; j++) {
-                if (jugadores[i].cards[j].chartAt(1) == "J" || jugadores[i].cards[j].charAt(1) == "Q" || jugadores[i].cards[j].charAt(1) == "K") {
-                    puntos += 10;
-                }
-                else {
-                    puntos += parseInt(jugadores[i].cards[j].substr(1));
+                if(jugadores[i].cards[j] != null){
+                    if (jugadores[i].cards[j].charAt(1) == "J" || jugadores[i].cards[j].charAt(1) == "Q" || jugadores[i].cards[j].charAt(1) == "K") {
+                        puntoS = puntoS + 10;
+                    }
+                    else if(jugadores[i].cards[j].charAt(1) == "A"){
+                        puntoS += 1;
+                    }
+                    else {
+                        puntoS = puntoS + parseInt(jugadores[i].cards[j].charAt(1));
+                    }
                 }
             };
-            juego.players[i].puntos = puntos;
+            juego.players[i].puntos = puntoS;
         };
         GameController.actualizarJuego(id, juego);
     });
