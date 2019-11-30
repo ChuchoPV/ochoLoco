@@ -82,7 +82,6 @@ exports.contarPuntos = (game, player) => {
         let puntos = 0;
         for (var i = 0; i < jugadores.length; i++) {
             for (var j = 0; j < jugadores[i].cards.length; j++) {
-                console.log("jugador: "+jugadores[i].cards[j])
                 if (jugadores[i].cards[j].chartAt(1) == "J" || jugadores[i].cards[j].charAt(1) == "Q" || jugadores[i].cards[j].charAt(1) == "K") {
                     puntos += 10;
                 }
