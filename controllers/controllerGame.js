@@ -19,6 +19,7 @@ exports.comerCarta = (req, res, game, player) => {
                 baraja = cartaComida[1];
             }
             juego.players = jugadores;
+            juego.deck_cards = baraja;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
         res.redirect('/consultarJuego/' + game + '/' + player);
