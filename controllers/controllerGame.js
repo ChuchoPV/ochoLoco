@@ -113,9 +113,9 @@ exports.hayGanador = (game) => {
         for (var i = 0; i < jugadores.length; i++) {
             if (jugadores[i].cards.length == 0) {
                 ganador = jugadores[i].id;
-                return ganador;
+                juego.ganador = ganador;
             };
-            //GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
     });
 };

@@ -142,7 +142,6 @@ exports.consultarJuego = (req, res) => {
     var juegoNew = juego;
     
     console.log(juego)
-    //console.log(juego.ganador);
     if(juegoNew[0].ganador != undefined){
       console.log(juego.ganador);
     }
