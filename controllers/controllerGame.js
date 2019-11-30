@@ -19,6 +19,7 @@ exports.comerCarta = (req, res, game, player) => {
                 baraja = cartaComida[1];
             }
             juego.players = jugadores;
+            juego.deck_cards = baraja;
             GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
         res.redirect('/consultarJuego/' + game + '/' + player);
@@ -80,18 +81,26 @@ exports.contarPuntos = (game, player) => {
         let jugadores = juego.players;
         let puntos = 0;
         for (var i = 0; i < jugadores.length; i++) {
-            if (jugadores[i].id == player) {
-                for (var j = 0; j < jugadores[i].cards.length; j++) {
-                    if (jugadores[i].cards[j].substr(1) == "J" || jugadores[i].cards[j].substr(1) == "Q" || jugadores[i].cards[j].substr(1) == "K") {
-                        puntos += 10;
-                    }
-                    else {
-                        puntos += parseInt(jugadores[i].cards[j].substr(1));
-                    }
-                };
-                GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+            for (var j = 0; j < jugadores[i].cards.length; j++) {
+                console.log("jugador: "+jugadores[i].cards[j])
+                if (jugadores[i].cards[j].chartAt(1) == "J" || jugadores[i].cards[j].charAt(1) == "Q" || jugadores[i].cards[j].charAt(1) == "K") {
+                    puntos += 10;
+                }
+                else {
+                    puntos += parseInt(jugadores[i].cards[j].substr(1));
+                }
             };
+            juego.players[i].puntos = puntos;
         };
+        var ganador;
+        if(juego.players[0].puntos > juego.players[1].puntos){
+            ganador = '0';
+            juego.ganador = '0'
+        }else{
+            ganador = '1';
+            juego.ganador = '1'
+        }
+        GameController.actualizarJuego(id, juego);
     });
 };
 
@@ -105,8 +114,9 @@ exports.hayGanador = (game) => {
         for (var i = 0; i < jugadores.length; i++) {
             if (jugadores[i].cards.length == 0) {
                 ganador = jugadores[i].id;
+                return ganador;
             };
-            GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
+            //GameController.actualizarJuego(id, juego); // Debe enviar un body (URL)
         };
     });
 };

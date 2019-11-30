@@ -141,69 +141,79 @@ exports.consultarJuego = (req, res) => {
     if (err) throw err;
     var juegoNew = juego;
     
-    for(var j = 0; j < juegoNew[0].players.length; j++){
-      
-      if(juegoNew[0].players.length > 1){
-        if(req.params.user == juegoNew[0].players[juegoNew[0].turno].id){
-          juegoNew[0].comer_link = "/comerCarta/"+juegoNew[0].id  +"/"+ juegoNew[0].players[juegoNew[0].turno].id
-          juegoNew[0].comer = "back_card"
-        }else{
-          juegoNew[0].comer_link = '#'
-          juegoNew[0].comer = "none"
-        }
-      }
-      
-      for(var i = 0; i < juegoNew[0].players[j].cards.length; i++){
-        var palo = getPaloImage(juegoNew[0].players[j].cards[i].charAt(0));
-        var cardTopPalo = juegoNew[0].top_card.charAt(0);
-        var cardTopNum = juegoNew[0].top_card.charAt(1);
-        var cardPalo = juegoNew[0].players[j].cards[i].charAt(0);
-        var cardNum = juegoNew[0].players[j].cards[i].charAt(1);
-        var playable = 'carta';
-        var link;
-        if ( (cardPalo == cardTopPalo || cardNum == '8' || cardNum == cardTopNum) && req.params.user == juegoNew[0].players[juegoNew[0].turno].id) {
-          if(juegoNew[0].players[j].cards[i].original == undefined){
-            link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i];
-          }else{
-            link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i].original;
-          }
-        }else{
-          playable = 'none';
-          link = "#";
-        }
-        var newCard;
-        if(juegoNew[0].players.length > 1){
-          newCard = {
-            original : cardPalo+cardNum,
-            value : juegoNew[0].players[j].cards[i].charAt(1),
-            foto : palo,
-            jugable: playable,
-            url: link
-          }
-        }else{
-          newCard = {
-            original : cardPalo+cardNum,
-            value : juegoNew[0].players[j].cards[i].charAt(1),
-            foto : palo,
-            jugable: false,
-            url: '#'
-          }
-        }
-        juegoNew[0].players[j].cards[i] = newCard;
-      }
+    console.log(juego)
+    //console.log(juego.ganador);
+    if(juegoNew[0].ganador != undefined){
+      console.log(juego.ganador);
     }
-    juegoNew[0].top_card = getPaloImage(juegoNew[0].top_card.charAt(0)) + " " +juegoNew[0].top_card.charAt(1)
+    else if(juegoNew[0].deck_cards.length == 0){
+      GameController.contarPuntos(req.params.id, req.params.user)
+    }else{
     
-    var playerNew;
-    juegoNew[0].players.forEach((player) => {
-      if(player.id == req.params.user){
-        playerNew = player;
+      for(var j = 0; j < juegoNew[0].players.length; j++){
+        
+        if(juegoNew[0].players.length > 1){
+          if(req.params.user == juegoNew[0].players[juegoNew[0].turno].id){
+            juegoNew[0].comer_link = "/comerCarta/"+juegoNew[0].id  +"/"+ juegoNew[0].players[juegoNew[0].turno].id
+            juegoNew[0].comer = "back_card"
+          }else{
+            juegoNew[0].comer_link = '#'
+            juegoNew[0].comer = "none"
+          }
+        }
+        
+        for(var i = 0; i < juegoNew[0].players[j].cards.length; i++){
+          var palo = getPaloImage(juegoNew[0].players[j].cards[i].charAt(0));
+          var cardTopPalo = juegoNew[0].top_card.charAt(0);
+          var cardTopNum = juegoNew[0].top_card.charAt(1);
+          var cardPalo = juegoNew[0].players[j].cards[i].charAt(0);
+          var cardNum = juegoNew[0].players[j].cards[i].charAt(1);
+          var playable = 'carta';
+          var link;
+          if ( (cardPalo == cardTopPalo || cardNum == '8' || cardNum == cardTopNum) && req.params.user == juegoNew[0].players[juegoNew[0].turno].id) {
+            if(juegoNew[0].players[j].cards[i].original == undefined){
+              link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i];
+            }else{
+              link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i].original;
+            }
+          }else{
+            playable = 'none';
+            link = "#";
+          }
+          var newCard;
+          if(juegoNew[0].players.length > 1){
+            newCard = {
+              original : cardPalo+cardNum,
+              value : juegoNew[0].players[j].cards[i].charAt(1),
+              foto : palo,
+              jugable: playable,
+              url: link
+            }
+          }else{
+            newCard = {
+              original : cardPalo+cardNum,
+              value : juegoNew[0].players[j].cards[i].charAt(1),
+              foto : palo,
+              jugable: false,
+              url: '#'
+            }
+          }
+          juegoNew[0].players[j].cards[i] = newCard;
+        }
       }
-    });
-    juegoNew[0].players.splice( juegoNew[0].players.indexOf(playerNew), 1);
-    juegoNew[0].players.unshift( playerNew );
-    juegoNew[0]
-    res.render('juego.html', {game: juegoNew[0]});
+      juegoNew[0].top_card = getPaloImage(juegoNew[0].top_card.charAt(0)) + " " +juegoNew[0].top_card.charAt(1)
+      
+      var playerNew;
+      juegoNew[0].players.forEach((player) => {
+        if(player.id == req.params.user){
+          playerNew = player;
+        }
+      });
+      juegoNew[0].players.splice( juegoNew[0].players.indexOf(playerNew), 1);
+      juegoNew[0].players.unshift( playerNew );
+      juegoNew[0]
+      res.render('juego.html', {game: juegoNew[0]});
+    }
   });
 };
 
