@@ -95,25 +95,18 @@
                 </div>
              </div>
         </div>
-        <div class="row align-items-center">
-            <div class="col" id="form">
-                <form action='actualizar' method="POST">
-                    <label>Selecciona el palo que quieras cambiar</label>
-                    <select name="palo">
-                         <option value="P">Picas/Espadas</option>
-                         <option value="D">Diamantes</option>
-                         <option value="C">Coraones<option>
-                         <option value="T">Trébol</option>
-                    </select>
-                    <input type="hidden" name="game" value=<% game.id%> />
-                    <input type="hidden" name="player" value=<% game.players[0].id%> />
-                    <input type="submit" value="Seleccionar"/>
-                </form>
-            </div>
-        </div>
         <div class="row align-items-end" style="height:30vh;">
             <% game.players[0].cards.forEach( (card) => { %>
                 <div class="card col" id=<%= card.jugable %>>
+                    <%if(card.value == 8){ %>
+                        <form action="/usarCarta" method='POST'>
+                            <input type="text" name="palo"/>
+                            <input type="hidden" name="card" value=<%= card.original %>/>
+                            <input type="hidden" name="game" value=<%= game.id%> />
+                            <input type="hidden" name="player" value=<%= game.players[0].id%> />
+                            <input type="submit" value="send"/>
+                        </form>
+                    <%}%>
                     <a href=<%= card.url%>>
                       <div class="card-body container">
                         <div class="row">

@@ -109,7 +109,7 @@ exports.actualizarJuego = (game_id, game) => {
     { id: game_id }, { $set: game },
     (err, juego) => {
       if (err) throw err;
-      //console.log(juego);
+      console.log(game)
     }
   );
 };
@@ -140,6 +140,8 @@ exports.consultarJuego = (req, res) => {
   Game.find({ id: req.params.id }, (err, juego) => {
     if (err) throw err;
     var juegoNew = juego;
+    
+    //console.log(juego)
     
     juegoNew[0].players.forEach( (player) => {
       if(player.cards.length == 0){
@@ -194,18 +196,35 @@ exports.consultarJuego = (req, res) => {
           var cardTopNum = juegoNew[0].top_card.charAt(1);
           var cardPalo = juegoNew[0].players[j].cards[i].charAt(0);
           var cardNum = juegoNew[0].players[j].cards[i].charAt(1);
+          
           var playable = 'carta';
           var link;
-          if ( (cardPalo == cardTopPalo || cardNum == '8' || cardNum == cardTopNum) && req.params.user == juegoNew[0].players[juegoNew[0].turno].id) {
+          var changePalo = '#';
+          
+          if ( ( cardPalo == juego[0].palo || cardNum == '8' || cardNum == cardTopNum) && req.params.user == juegoNew[0].players[juegoNew[0].turno].id) {
             if(juegoNew[0].players[j].cards[i].original == undefined){
-              link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i];
+              if(juegoNew[0].players[j].cards[i].charAt(1) == 8){
+                link = "#"
+                changePalo = '/usarCarta'
+              }else{
+                link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i];
+              }
             }else{
-              link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i].original;
+              if(juegoNew[0].players[j].cards[i].original.charAt(1) == 8){
+                link = "#"
+                changePalo = '/usarCarta'
+              }else{
+                link = "/usarCarta/"+ juegoNew[0].id +"/"+ juegoNew[0].players[j].id +"/"+juegoNew[0].players[j].cards[i].original;
+              }
             }
+            
           }else{
+            changePalo= '#'
             playable = 'none';
             link = "#";
           }
+          
+          
           var newCard;
           if(juegoNew[0].players.length > 1){
             newCard = {
@@ -213,7 +232,8 @@ exports.consultarJuego = (req, res) => {
               value : juegoNew[0].players[j].cards[i].charAt(1),
               foto : palo,
               jugable: playable,
-              url: link
+              url: link,
+              cambiarPalo : changePalo
             }
           }else{
             newCard = {
