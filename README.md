@@ -14,7 +14,7 @@ Aplicación Web para ejecutar el juego de cartas Ocho Loco.
 
 
 ## Autores
-`Gaydrian` Méndez López A01379228
-Jorge Aharon López Aguilar A01373474
-Jesús Perea Villegas A01378903
-Servio Tulio Reyes Castillo A01371719
+- `Gaydrian` Méndez López A01379228
+- Jorge Aharon López Aguilar A01373474
+- Jesús Perea Villegas A01378903
+- Servio Tulio Reyes Castillo A01371719
